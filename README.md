@@ -18,7 +18,7 @@ Building from source includes the following steps:
 1. Done!
 
 ### Download ready-to-use JAR:
-Downloading the stable JAR releases is the preferred and includes those steps below:
+Downloading the stable JAR releases is the preferred method and includes the steps below:
 1. Navigate to project's official repository on GitHub.
 1. Choose the desired release and download the corresponding `.jar` file
 1. Done!
