@@ -1,5 +1,3 @@
-package com.geovas.games;
-
 import java.util.Scanner;
 
 public class CLI implements UI {

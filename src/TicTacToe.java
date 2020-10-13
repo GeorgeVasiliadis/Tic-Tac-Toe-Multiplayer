@@ -1,5 +1,3 @@
-package com.geovas.games;
-
 public class TicTacToe {
     private Board board;
     private UI gui;

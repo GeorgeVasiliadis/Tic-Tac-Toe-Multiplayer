@@ -1,5 +1,3 @@
-package com.geovas.games;
-
 public class Board {
     private int size;
     private int board[][];

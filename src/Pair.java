@@ -1,5 +1,3 @@
-package com.geovas.games;
-
 public class Pair {
     public int x;
     public int y;
