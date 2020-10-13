@@ -5,7 +5,9 @@ public class CLI implements UI {
     @Override
     public Pair makeMove(){
         Scanner scanner = new Scanner(System.in);
-        int x = scanner.nextInt();
+        System.out.print("x: ");
+	int x = scanner.nextInt();
+	System.out.print("y: ");
         int y = scanner.nextInt();
         return new Pair(x,y);
     }
