@@ -1,35 +1,30 @@
 public class TicTacToe {
     private Board board;
-    private UI gui;
+    private UI ui;
     private int size;
     private int symbol;
 
     public TicTacToe(int size){
         board = new Board(size);
-        gui = new CLI();
         this.size = size;
-        boolean terminalState = false;
         symbol = 1;
-        Pair pair;
-        gui.updateBoard(board);
-        while(!terminalState){
-            while(true){
-                pair = gui.makeMove();
-                if(board.setXY(pair.x, pair.y, symbol)){
-                    break;
-                }
-            }
-            gui.updateBoard(board);
-            if(symbolWins(symbol)){
-                terminalState = true;
-                congrats(symbol);
-            } else if (isDraw()){
-                terminalState = true;
-                draw();
-            }
-            symbol *= -1;
-        }
+        ui = new GUI(this, board);
+        ui.run();
+    }
 
+    public void makeMove(int x, int y){
+        if(!board.setXY(x, y, symbol)) {
+            return;
+        }
+        ui.updateBoard(board);
+        if(symbolWins(symbol)) {
+            ui.info("Player" + (symbol == 1 ? "1" : "2") + " won!");
+            exit();
+        } else if (isDraw()){
+            ui.info("Game is Draw!");
+            exit();
+        }
+        symbol *= -1;
     }
 
     public TicTacToe(){
@@ -105,15 +100,8 @@ public class TicTacToe {
 
     }
 
-    private void congrats(int symbol){
-        if(symbol == 1){
-            System.out.println("Player 1 Won!");
-        } else {
-            System.out.println("Player 2 Won!");
-        }
-    }
-
-    private void draw(){
-        System.out.println("The Game is Draw!");
+    private void exit(){
+        ui.info("Goodbye");
+        System.exit(0);
     }
 }

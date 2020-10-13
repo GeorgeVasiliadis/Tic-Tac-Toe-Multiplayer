@@ -1,4 +1,5 @@
 public interface UI {
-    Pair makeMove();
+    void run();
     void updateBoard(Board board);
+    void info(String message);
 }

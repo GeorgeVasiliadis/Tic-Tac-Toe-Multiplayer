@@ -4,42 +4,40 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI extends JFrame implements UI {
-    private Pair activePair;
     private JButton[][] buttons;
 
-    public GUI(int size){
-        super();
+    public GUI(TicTacToe parent, Board board){
+        super("Tic-Tac-Toe-Multiplayer");
+
+        int size = board.getSize();
+
         GridLayout grid = new GridLayout(size, size);
-        this.setLayout(grid);
-        activePair = new Pair(0,0);
+        setLayout(grid);
+
         buttons = new JButton[size][size];
-        JButton temp;
         for(int y=0; y<size; y++){
             for(int x=0; x<size; x++){
-                int fx = x;
-                int fy = y;
-                temp = new JButton();
-                temp.setPreferredSize(new Dimension(150,150));
-                temp.addActionListener(new ActionListener() {
+                int finalX = x;
+                int finalY = y;
+                buttons[x][y] = new JButton();
+                buttons[x][y].setPreferredSize(new Dimension(150,150));
+                buttons[x][y].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        //activePair.x = fx;
-                        //activePair.y = fy;
-                        activePair = new Pair(fx,fy);
+                        parent.makeMove(finalX, finalY);
                     }
                 });
-                buttons[x][y] = temp;
                 this.add(buttons[x][y]);
             }
         }
-        this.pack();
-        this.setVisible(true);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     @Override
-    public Pair makeMove(){
-        return new Pair(activePair.x, activePair.y);
-    }
+    public void run(){}
 
     @Override
     public void updateBoard(Board board) {
@@ -50,6 +48,11 @@ public class GUI extends JFrame implements UI {
 
             }
         }
+    }
+
+    @Override
+    public void info (String message){
+        JOptionPane.showMessageDialog(null, message);
     }
 
     private char symbol(int symbol){
