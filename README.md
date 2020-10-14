@@ -46,7 +46,7 @@ Upcoming releases will gradually include:
 - [ ] Classic game against AI
 - [ ] Remote multiplayer game
 - [ ] Android devices support
-- [ ] Modern GUI
+- [x] Modern GUI
 - [ ] Further user customization
 
 ---
