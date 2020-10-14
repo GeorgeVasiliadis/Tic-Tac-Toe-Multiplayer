@@ -43,6 +43,7 @@ The currently supported features include:
 
 ## toDo List
 Upcoming releases will gradually include:
+*(Ticked items are currently under development)*
 - [ ] Classic game against AI
 - [ ] Remote multiplayer game
 - [ ] Android devices support
