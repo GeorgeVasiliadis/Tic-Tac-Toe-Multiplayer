@@ -1,43 +1,34 @@
-public class TicTacToe {
+public class TTTM_Model {
     private Board board;
-    private UI ui;
     private int size;
-    private int symbol;
+    private int player;
 
-    public TicTacToe(int size){
+    public TTTM_Model(int size){
         board = new Board(size);
         this.size = size;
-        symbol = 1;
-        ui = new GUI(this, board);
-        ui.run();
+        player = -1;
     }
 
-    public void makeMove(int x, int y){
-        if(!board.setXY(x, y, symbol)) {
-            return;
+    public int getSize(){
+        return size;
+    }
+
+    public boolean makeMove(int x, int y){
+        if(!board.setXY(x, y, getNextPlayer())) {
+            return false;
+        } else {
+            player = getNextPlayer();
+            return true;
         }
-        ui.updateBoard(board);
-        if(symbolWins(symbol)) {
-            ui.info("Player" + (symbol == 1 ? "1" : "2") + " won!");
-            exit();
-        } else if (isDraw()){
-            ui.info("Game is Draw!");
-            exit();
-        }
-        symbol *= -1;
     }
 
-    public TicTacToe(){
-        this(3);
-    }
-
-    private boolean isDraw(){
-        int current;
+    public boolean isDraw(){
+        int cell;
 
         for(int y=0; y<size; y++){
             for(int x=0; x<size; x++) {
-                current = board.getXY(x, y);
-                if (current == 0) {
+                cell = board.getXY(x, y);
+                if (cell == 0) {
                     return false;
                 }
             }
@@ -45,14 +36,14 @@ public class TicTacToe {
         return true;
     }
 
-    private boolean symbolWins(int symbol){
+    public boolean playerWins(int player){
         boolean threeInRow;
 
         // Check by rows
         for(int y=0; y<size; y++){
             threeInRow = true;
             for(int x=0; x<size; x++) {
-                if (board.getXY(x, y) != symbol) {
+                if (board.getXY(x, y) != player) {
                     threeInRow = false;
                     break;
                 }
@@ -66,7 +57,7 @@ public class TicTacToe {
         for(int x=0; x<size; x++){
             threeInRow = true;
             for(int y=0; y<size; y++){
-                if(board.getXY(x,y) != symbol){
+                if(board.getXY(x,y) != player){
                     threeInRow = false;
                     break;
                 }
@@ -79,7 +70,7 @@ public class TicTacToe {
         // Check primary diagonal
         threeInRow = true;
         for(int i=0; i<size; i++){
-            if(board.getXY(i,i) != symbol){
+            if(board.getXY(i,i) != player){
                 threeInRow = false;
                 break;
             }
@@ -91,17 +82,16 @@ public class TicTacToe {
         // Check secondary diagonal
         threeInRow = true;
         for(int i=0; i<size; i++){
-            if(board.getXY(i, size-i-1) != symbol){
+            if(board.getXY(i, size-i-1) != player){
                 threeInRow = false;
                 break;
             }
         }
         return threeInRow;
-
     }
 
-    private void exit(){
-        ui.info("Goodbye");
-        System.exit(0);
+    public int getNextPlayer(){
+        return -player;
     }
+    public int getLastPlayer(){ return player;}
 }

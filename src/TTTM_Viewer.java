@@ -3,15 +3,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUI extends JFrame implements UI {
+public class TTTM_Viewer extends JPanel implements UI {
     private JButton[][] buttons;
 
-    public GUI(TicTacToe parent, Board board){
-        super("Tic-Tac-Toe-Multiplayer");
+    public TTTM_Viewer(TTTM_Controller controller, TTTM_Model model){
+        super();
 
-        int size = board.getSize();
+        int size = model.getSize();
 
-        GridLayout grid = new GridLayout(size, size);
+        GridLayout grid = new GridLayout(size, size, 4, 4);
         setLayout(grid);
 
         buttons = new JButton[size][size];
@@ -24,15 +24,13 @@ public class GUI extends JFrame implements UI {
                 buttons[x][y].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        parent.makeMove(finalX, finalY);
+                        controller.makeMove(finalX, finalY);
                     }
                 });
                 this.add(buttons[x][y]);
             }
         }
 
-        pack();
-        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -40,14 +38,8 @@ public class GUI extends JFrame implements UI {
     public void run(){}
 
     @Override
-    public void updateBoard(Board board) {
-        int size = board.getSize();
-        for(int y=0; y<size; y++) {
-            for (int x = 0; x < size; x++) {
-                buttons[x][y].setText("" + symbol(board.getXY(x,y)));
-
-            }
-        }
+    public void updateBoard(int x, int y, int symbol) {
+        buttons[x][y].setText("" + toSymbol(symbol));
     }
 
     @Override
@@ -55,7 +47,7 @@ public class GUI extends JFrame implements UI {
         JOptionPane.showMessageDialog(null, message);
     }
 
-    private char symbol(int symbol){
+    private char toSymbol(int symbol){
         if(symbol == 1){
             return 'X';
         } else if(symbol == -1){

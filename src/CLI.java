@@ -1,17 +1,17 @@
 import java.util.Scanner;
 
 public class CLI implements UI {
-    private TicTacToe parent;
+    private TTTM_Model parent;
     private Board board;
 
-    public CLI(TicTacToe parent, Board board){
+    public CLI(TTTM_Model parent, Board board){
         this.parent = parent;
         this.board = board;
     }
 
     @Override
     public void run(){
-        updateBoard(board);
+        updateBoard(1,111,1);
         while(true) {
             Scanner scanner = new Scanner(System.in);
             System.out.print("x: ");
@@ -24,15 +24,15 @@ public class CLI implements UI {
     }
 
     @Override
-    public void updateBoard(Board board){
+    public void updateBoard(int x, int y, int symbol){
         int size = board.getSize();
         System.out.print("   ");
-        for(int x=0; x<size; x++){
+        for(int xg=0; x<size; x++){
             System.out.print("  " + x + " ");
         }
         System.out.println("");
 
-        for(int y=0; y<size; y++){
+        for(int yg=0; y<size; y++){
 
             System.out.print("   -");
             for(int i=0; i<size; i++){
@@ -40,7 +40,7 @@ public class CLI implements UI {
             }
             System.out.println("");
             System.out.print(y +"  |");
-            for(int x=0; x<size; x++){
+            for(int xg=0; x<size; x++){
                 System.out.print(" " + symbol(board.getXY(x,y)) + " |");
             }
             System.out.println("");

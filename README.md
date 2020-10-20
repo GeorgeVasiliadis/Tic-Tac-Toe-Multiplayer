@@ -14,7 +14,7 @@ Building from source includes the following steps:
 1. Navigate to `src`
 1. Run `javac * -d ../out`
 1. Navigate back to `out` directory
-1. Run `java cfe TicTacToe.jar Main *.class`
+1. Run `java cfe TTTM_Model.jar Main *.class`
 1. Done!
 
 ### Download ready-to-use JAR:
@@ -49,7 +49,7 @@ Upcoming releases will gradually include:
 - [ ] Classic game against AI
 - [ ] Remote multiplayer game
 - [ ] Android devices support
-- [x] Modern GUI
+- [x] Modern TTTM_Viewer
 - [ ] Further user customization
 
 ---
